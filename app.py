@@ -8,11 +8,8 @@ from classes.juego import Juego
 
 load_dotenv()
 
-# Configurar conexión a MongoDB
-username = "fcardonabanegas"
-password = "Creeper@5"
-escaped_password = urllib.parse.quote(password)
-URI = f"mongodb+srv://{username}:{escaped_password}@cluster0.cqmsaac.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+# Conexión con cluster de Atlas MongoDB
+URI = cls.uri = f"mongodb+srv://fcardonabanegas:" + urllib.parse.quote("Creeper@5") + "@cluster0.cqmsaac.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 def get_database():
     client = MongoClient(URI)
