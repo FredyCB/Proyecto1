@@ -13,7 +13,7 @@ class TestModelo(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Configurar conexión de prueba
-        username = "fcardonabanegas"
+        username = "fcardonabanegas@gmail.com"
         password = "Creeper@5"
         escaped_password = urllib.parse.quote(password)
         cls.uri = f"mongodb+srv://{username}:{escaped_password}@cluster0.cqmsaac.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
