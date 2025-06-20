@@ -1,28 +1,26 @@
 from dataclasses import dataclass, field #genera métodos especiales
 from typing import List, Optional
-from typing import List, Optional
 from bson import ObjectId
 
 @dataclass
-class Local:
+class Juego:
     _id: Optional[ObjectId] = None
-    nombre: str = ""
-    direccion: str = ""
-    telefono: str = ""
-    juegos_ids: List[ObjectId] = field(default_factory=list)
+    titulo: str = ""
+    genero: str = ""
+    precio: float = 0.0
+    locales_ids: List[ObjectId] = field(default_factory=list)
 
-    def save(self, db): #Crea un diccionario local data, con los datos del local
-        local_data = {
-            "nombre": self.nombre,
-            "direccion": self.direccion,
-            "telefono": self.telefono,
-            "juegos_ids": self.juegos_ids
+    def save(self, db): #Crea un diccionario local data, con los datos del juego
+        juego_data = {
+            "titulo": self.titulo,
+            "genero": self.genero,
+            "precio": self.precio,
+            "locales_ids": self.locales_ids
         }
         
-        if self._id is None:
-            result = db.locales.insert_one(local_data)
+        if self._id is None: # Guarda el nuevo id como una nueva coleccion
+            result = db.juegos.insert_one(juego_data)
             self._id = result.inserted_id
         else:
-            db.locales.update_one({"_id": self._id}, {"$set": local_data})
-        
+            db.juegos.update_one({"_id": self._id}, {"$set": juego_data})
         return str(self._id)
