@@ -1,5 +1,5 @@
 import unittest
-import os
+import urllib.parse
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from bson import ObjectId
@@ -13,7 +13,7 @@ class TestModelo(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Configurar conexión de prueba
-        cls.uri = f"mongodb+srv://fcardonabanegas:" + urllib.parse.quote("Creeper@5") + "@cluster0.cqmsaac.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+        cls.uri = "mongodb+srv://fcardonabanegas:" + urllib.parse.quote("Creeper@5") +  "@cluster0.cqmsaac.mongodb.net/"
         cls.client = MongoClient(cls.uri)
         cls.db = cls.client["videojuegos_test_db"]
     
@@ -41,10 +41,10 @@ class TestModelo(unittest.TestCase):
         
         # Verificar relación
         juego_recuperado = self.db.juegos.find_one({"_id": ObjectId(juego_id)})
-        self.assertIn(ObjectId(local_id), juego_recuperado["locales_ids"])
+        self.assertIn(ObjectId(local_id), juego_recuperado["locales_ids"]) # type: ignore
         
         local_recuperado = self.db.locales.find_one({"_id": ObjectId(local_id)})
-        self.assertIn(ObjectId(juego_id), local_recuperado["juegos_ids"])
+        self.assertIn(ObjectId(juego_id), local_recuperado["juegos_ids"]) # type: ignore
 
 if __name__ == "__main__":
     unittest.main()
