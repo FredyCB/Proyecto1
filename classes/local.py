@@ -1,4 +1,5 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field #genera métodos especiales
+from typing import List, Optional
 from typing import List, Optional
 from bson import ObjectId
 
@@ -10,7 +11,7 @@ class Local:
     telefono: str = ""
     juegos_ids: List[ObjectId] = field(default_factory=list)
 
-    def save(self, db):
+    def save(self, db): #Crea un diccionario local data, con los datos del local
         local_data = {
             "nombre": self.nombre,
             "direccion": self.direccion,
